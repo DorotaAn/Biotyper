@@ -1,5 +1,5 @@
 
-# Raw MS data pipeline for distinguishing bacterial subspecies - Biotyper
+# Raw MS data pipeline for distinguishing bacterial subspecies - Whole Cell MALDI
 
 ## Libraries
 
