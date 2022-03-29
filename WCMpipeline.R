@@ -1,11 +1,5 @@
 
-### Raw MS data pipeline for distinguishing bacterial subspecies - Biotyper
-
-## Motivation
-## To distinguish between bacterial sub types, Mass Spectrum (MS) data can be used. It allows identification of differences 
-## in protein expression between bacterial samples treated and untreated with antibiotic. This pipeline allows processing 
-## of raw MS data required for analysis and visualization of the results, which in turn can help distinguish between 
-## the bacterial sub types based on their proteome.
+# Raw MS data pipeline for distinguishing bacterial subspecies - Whole Cell MALDI
 
 ## Libraries
 
@@ -20,50 +14,48 @@ library("data.table")
 
 ## Data import
 
-# Loading spectra
-
-# Importing the spectrum data from .dat files produced by BRUKER MALDI software and the associated metadata, by loading 
-## content of entire folder. Immediate conversion into MassSpectrum object. Creating a back up object. Printing summary 
-## spectra (first 10).
+### Loading spectra
+### Importing the spectrum data from .dat files produced by BRUKER MALDI software and the associated metadata, by loading 
+### content of entire folder. Immediate conversion into MassSpectrum object. Creating a back up object. Printing summary 
+### spectra (first 10).
 
 spectra <- importSpectra(where = "PATH")
 spectra2 <- spectra
 summarySpectra(spectra[1:10])
 
-# Loading metadata
-# Reading in the associated metadata, directly from excel. Selecting for columns of interest only.
+### Loading metadata
+### Reading in the associated metadata, directly from excel. Selecting for columns of interest only.
 
 metadata <- read_excel("PATH.xlsx")
 
 ## Data checks
-## Checking for compatibility between metadata and spectra.
-
-# Name matching
-# Checking if names in metadata and spectra match.
+### Checking for compatibility between metadata and spectra.
+### Name matching
+### Checking if names in metadata and spectra match.
 
 setdiff(metadata$"File name",names(spectra))
 setdiff(names(spectra),metadata$"File name")
 
-# Duplications
-# Checking if there is any duplication in both metadata and spectra.
+### Duplications
+### Checking if there is any duplication in both metadata and spectra.
 
 any(duplicated(metadata$"File name")) 
 any(duplicated(names(spectra)))
 
-# Correct format
-# Checking if file names format from spectra matches file name format in metadata. 
+### Correct format
+### Checking if file names format from spectra matches file name format in metadata. 
 
 all(names(spectra) == metadata$"File name")
 
 
-# Setting all File names in spectra and metadata to be of character format. Performing additional check if format matches.
+### Setting all File names in spectra and metadata to be of character format. Performing additional check if format matches.
 
 spectra <- spectra[as.character(metadata$"File name")]
 p1 <- as.character(metadata$"File name")
 p2 <- as.character(names(spectra))
 all(p1 == p2) 
 
-# Setting all remaining data in metadata object to factor format
+### Setting all remaining data in metadata object to factor format
 
 metadata$Species <- as.factor(metadata$Species)
 metadata$Number <- as.factor(metadata$Number)
