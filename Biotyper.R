@@ -1,12 +1,6 @@
 
 ### Raw MS data pipeline for distinguishing bacterial subspecies - Biotyper
 
-## Motivation
-## To distinguish between bacterial sub types, Mass Spectrum (MS) data can be used. It allows identification of differences 
-## in protein expression between bacterial samples treated and untreated with antibiotic. This pipeline allows processing 
-## of raw MS data required for analysis and visualization of the results, which in turn can help distinguish between 
-## the bacterial sub types based on their proteome.
-
 ## Libraries
 
 library("MALDIquant")
